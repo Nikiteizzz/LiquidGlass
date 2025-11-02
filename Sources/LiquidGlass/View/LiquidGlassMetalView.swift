@@ -28,16 +28,16 @@ final public class LiquidGlassMetalView: MTKView, MTKViewDelegate {
     private var texture: MTLTexture?
     private var intermediateTexture: MTLTexture?
     
-    var corner: CGFloat = .zero {
+    public var corner: CGFloat = .zero {
         didSet {
             layer.cornerRadius = corner
             clipsToBounds = true
         }
     }
     
-    var effectHeight: CGFloat = 20
-    var effectAmount: CGFloat = 10
-    var depthEffect: CGFloat = 0
+    public var effectHeight: CGFloat = 20
+    public var effectAmount: CGFloat = 10
+    public var depthEffect: CGFloat = 0
 
     override init(frame frameRect: CGRect, device: MTLDevice?) {
         let metalDevice = device ?? MTLCreateSystemDefaultDevice()
@@ -89,7 +89,7 @@ final public class LiquidGlassMetalView: MTKView, MTKViewDelegate {
         delegate = self
     }
 
-    func setImage(_ image: UIImage?) {
+    public func setImage(_ image: UIImage?) {
         guard let image = image,
               let cgImage = image.cgImage,
               let device = device else {

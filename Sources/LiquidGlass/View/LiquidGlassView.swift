@@ -2,9 +2,9 @@ import SwiftUI
 
 public struct LiquidGlassView: View {
     @State
-    var configuration: Configuration = .basic
+    public var configuration: Configuration = .basic
     @State
-    var glassType: GlassType = .regular
+    public var glassType: GlassType = .regular
     
     public var body: some View {
         LiquidGlassMetalViewRepresentable(corner: configuration.corner, glassType: glassType)
@@ -16,7 +16,7 @@ public struct LiquidGlassView: View {
         
     }
     
-    func liquidGlassOverlay<Overlay: View>(_ content: @escaping () -> Overlay) -> some View {
+    public func liquidGlassOverlay<Overlay: View>(_ content: @escaping () -> Overlay) -> some View {
         self.overlay(content: {
             NonRenderableHostingViewRepresentable(content: content)
         })
@@ -27,8 +27,8 @@ public extension LiquidGlassView {
     struct Configuration: Sendable {
         public static let basic = Configuration()
         
-        var corner: CGFloat = .zero
-        var tint: Color = .clear
+        public var corner: CGFloat = .zero
+        public var tint: Color = .clear
     }
     
     struct GlassType: Sendable {
@@ -38,8 +38,8 @@ public extension LiquidGlassView {
             .init(height: height, amount: amount, depthEffect: depthEffect)
         }
         
-        var height: CGFloat
-        var amount: CGFloat
-        var depthEffect: CGFloat
+        public var height: CGFloat
+        public var amount: CGFloat
+        public var depthEffect: CGFloat
     }
 }

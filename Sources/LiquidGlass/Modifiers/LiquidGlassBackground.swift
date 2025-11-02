@@ -2,9 +2,9 @@ import SwiftUI
 
 public struct LiquidGlassBackground: ViewModifier {
     @State
-    public var configuration: LiquidGlassView.Configuration = .basic
+    public var configuration: LiquidGlassView.Configuration
     @State
-    public var type: LiquidGlassView.GlassType = .regular
+    public var type: LiquidGlassView.GlassType
     
     public init(configuration: LiquidGlassView.Configuration = .basic, type: LiquidGlassView.GlassType = .regular) {
         self.configuration = configuration

@@ -6,6 +6,11 @@ public struct LiquidGlassView: View {
     @State
     public var glassType: GlassType = .regular
     
+    public init(configuration: Configuration = .basic, glassType: GlassType = .regular) {
+        self.configuration = configuration
+        self.glassType = glassType
+    }
+    
     public var body: some View {
         LiquidGlassMetalViewRepresentable(corner: configuration.corner, glassType: glassType)
             .overlay {

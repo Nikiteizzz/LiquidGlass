@@ -32,3 +32,12 @@
 
 ---
 
+## 🚀 Installation
+
+### Swift Package Manager
+In your project’s `Package.swift` dependencies:
+
+```swift
+dependencies: [
+    .package(url: "https://github.com/Nikiteizzz/LiquidGlass.git", from: "1.0.0")
+]

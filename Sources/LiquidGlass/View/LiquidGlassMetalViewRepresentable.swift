@@ -4,9 +4,14 @@ public struct LiquidGlassMetalViewRepresentable: UIViewRepresentable {
     @StateObject
     private var globalScreenCapturer = GlobalWindowCapturer.shared
     @State
-    public var corner: CGFloat = .zero
+    public var corner: CGFloat
     @State
-    public var glassType: LiquidGlassView.GlassType = .regular
+    public var glassType: LiquidGlassView.GlassType
+    
+    public init(corner: CGFloat = .zero, glassType: LiquidGlassView.GlassType = .regular) {
+        self.corner = corner
+        self.glassType = glassType
+    }
     
     public func makeUIView(context: Context) -> LiquidGlassMetalView {
         let view = LiquidGlassMetalView(frame: .zero)

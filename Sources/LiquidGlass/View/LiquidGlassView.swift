@@ -2,9 +2,9 @@ import SwiftUI
 
 public struct LiquidGlassView: View {
     @State
-    public var configuration: Configuration = .basic
+    public var configuration: Configuration
     @State
-    public var glassType: GlassType = .regular
+    public var glassType: GlassType
     
     public init(configuration: Configuration = .basic, glassType: GlassType = .regular) {
         self.configuration = configuration

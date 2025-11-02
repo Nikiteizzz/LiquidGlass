@@ -32,6 +32,11 @@ public extension LiquidGlassView {
     struct Configuration: Sendable {
         public static let basic = Configuration()
         
+        public init(corner: CGFloat = .zero, tint: Color = .clear) {
+            self.corner = corner
+            self.tint = tint
+        }
+        
         public var corner: CGFloat = .zero
         public var tint: Color = .clear
     }
@@ -41,6 +46,12 @@ public extension LiquidGlassView {
         public static let regular = GlassType(height: 20, amount: 60, depthEffect: 1)
         public static func custom(height: CGFloat = 20, amount: CGFloat = 30, depthEffect: CGFloat = 1) -> GlassType {
             .init(height: height, amount: amount, depthEffect: depthEffect)
+        }
+        
+        public init(height: CGFloat, amount: CGFloat, depthEffect: CGFloat) {
+            self.height = height
+            self.amount = amount
+            self.depthEffect = depthEffect
         }
         
         public var height: CGFloat

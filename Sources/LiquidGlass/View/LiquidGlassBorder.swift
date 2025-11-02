@@ -2,7 +2,11 @@ import SwiftUI
 
 public struct LiquidGlassBorder: ViewModifier {
     @State
-    var cornerRadius: CGFloat
+    public var cornerRadius: CGFloat
+    
+    public init(cornerRadius: CGFloat) {
+        self.cornerRadius = cornerRadius
+    }
     
     public func body(content: Content) -> some View {
         content

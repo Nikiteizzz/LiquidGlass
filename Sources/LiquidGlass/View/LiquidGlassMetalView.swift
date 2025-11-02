@@ -1,7 +1,7 @@
 import MetalKit
 import SwiftUI
 
-struct RefractionParams {
+public struct RefractionParams {
     var viewSize: SIMD2<Float>
     var shapeSize: SIMD2<Float>
     var cornerRadii: SIMD4<Float>
@@ -11,7 +11,7 @@ struct RefractionParams {
     var padding: Float = 0
 }
 
-struct DispersionParams {
+public struct DispersionParams {
     var viewSize: SIMD2<Float>
     var shapeSize: SIMD2<Float>
     var cornerRadii: SIMD4<Float>
@@ -20,7 +20,7 @@ struct DispersionParams {
     var padding: SIMD2<Float> = .zero
 }
 
-final class LiquidGlassMetalView: MTKView, MTKViewDelegate {
+final public class LiquidGlassMetalView: MTKView, MTKViewDelegate {
     private var commandQueue: MTLCommandQueue?
     private var refractionPipeline: MTLRenderPipelineState?
     private var dispersionPipeline: MTLRenderPipelineState?
@@ -122,7 +122,7 @@ final class LiquidGlassMetalView: MTKView, MTKViewDelegate {
         intermediateTexture = device.makeTexture(descriptor: desc)
     }
 
-    func draw(in view: MTKView) {
+    public func draw(in view: MTKView) {
         guard let drawable = currentDrawable,
               let commandQueue = commandQueue,
               let refractionPipeline = refractionPipeline,
@@ -201,5 +201,5 @@ final class LiquidGlassMetalView: MTKView, MTKViewDelegate {
         commandBuffer.commit()
     }
 
-    func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {}
+    public func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {}
 }

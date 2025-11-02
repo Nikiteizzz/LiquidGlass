@@ -1,10 +1,10 @@
 import SwiftUI
 
-struct LiquidGlassBorder: ViewModifier {
+public struct LiquidGlassBorder: ViewModifier {
     @State
     var cornerRadius: CGFloat
     
-    func body(content: Content) -> some View {
+    public func body(content: Content) -> some View {
         content
             .overlay {
                 RoundedRectangle(cornerRadius: cornerRadius)
@@ -26,7 +26,7 @@ struct LiquidGlassBorder: ViewModifier {
     }
 }
 
-extension View {
+public extension View {
     func liquidGlassBorder(corner: CGFloat) -> some View {
         modifier(LiquidGlassBorder(cornerRadius: corner))
     }

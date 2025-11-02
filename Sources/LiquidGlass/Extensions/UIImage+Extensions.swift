@@ -1,6 +1,6 @@
 import UIKit
 
-extension UIImage {
+internal extension UIImage {
     func cropped(to rect: CGRect) -> UIImage {
         guard let cgImage = self.cgImage else { return .init() }
 

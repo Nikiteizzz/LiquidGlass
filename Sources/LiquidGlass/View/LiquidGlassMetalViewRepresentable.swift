@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct LiquidGlassMetalViewRepresentable: UIViewRepresentable {
+public struct LiquidGlassMetalViewRepresentable: UIViewRepresentable {
     @StateObject
     private var globalScreenCapturer = GlobalWindowCapturer.shared
     @State
@@ -8,7 +8,7 @@ struct LiquidGlassMetalViewRepresentable: UIViewRepresentable {
     @State
     var glassType: LiquidGlassView.GlassType = .regular
     
-    func makeUIView(context: Context) -> LiquidGlassMetalView {
+    public func makeUIView(context: Context) -> LiquidGlassMetalView {
         let view = LiquidGlassMetalView(frame: .zero)
         view.corner = corner
         view.depthEffect = glassType.depthEffect
@@ -18,7 +18,7 @@ struct LiquidGlassMetalViewRepresentable: UIViewRepresentable {
         return view
     }
     
-    func updateUIView(_ uiView: LiquidGlassMetalView, context: Context) {
+    public func updateUIView(_ uiView: LiquidGlassMetalView, context: Context) {
         uiView.depthEffect = glassType.depthEffect
         uiView.effectHeight = glassType.height
         uiView.effectAmount = glassType.amount

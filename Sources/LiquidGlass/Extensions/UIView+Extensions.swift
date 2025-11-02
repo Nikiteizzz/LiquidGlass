@@ -1,6 +1,6 @@
 import SwiftUI
 
-extension UIView {
+internal extension UIView {
     func parentViewController() -> UIViewController? {
         var responder: UIResponder? = self
         while let nextResponder = responder?.next {

@@ -1,12 +1,12 @@
 import SwiftUI
 
-struct LiquidGlassBackground: ViewModifier {
+public struct LiquidGlassBackground: ViewModifier {
     @State
     var configuration: LiquidGlassView.Configuration = .basic
     @State
     var type: LiquidGlassView.GlassType = .regular
     
-    func body(content: Content) -> some View {
+    public func body(content: Content) -> some View {
         content
             .opacity(0)
             .background {
@@ -18,7 +18,7 @@ struct LiquidGlassBackground: ViewModifier {
     }
 }
 
-extension View {
+public extension View {
     func liquidGlassBackground(
         _ configuration: LiquidGlassView.Configuration = .basic,
         glassType: LiquidGlassView.GlassType = .regular

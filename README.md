@@ -41,3 +41,13 @@ In your project’s `Package.swift` dependencies:
 dependencies: [
     .package(url: "https://github.com/Nikiteizzz/LiquidGlass.git", from: "1.0.0")
 ]
+```
+
+## 📬 Contact
+If you have any questions, ideas, or feedback — feel free to reach out:
+
+[Linkedin](https://www.linkedin.com/in/nikiteizzz/)
+
+[Telegram](https://t.me/nikiteizzz)
+
+

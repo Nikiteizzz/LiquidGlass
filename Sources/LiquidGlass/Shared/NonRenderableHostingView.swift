@@ -1,10 +1,6 @@
 import SwiftUI
 
 final class NonRenderableHostingView<Content: View>: UIView {
-    override class var layerClass: AnyClass {
-        NonRenderableLayer.self
-    }
-    
     private var hostingController: UIHostingController<Content>?
     
     var content: () -> Content
@@ -17,7 +13,7 @@ final class NonRenderableHostingView<Content: View>: UIView {
         setupHostingController()
     }
     
-    required init?(coder: NSCoder) {
+    required init(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     

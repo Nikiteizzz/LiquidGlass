@@ -115,6 +115,7 @@ struct LiquidGlassDemoView: View {
     private var glassSheets: some View {
         VStack {
             Toggle("Glass View", isOn: $isGlassViewDemoShown)
+                .padding(.horizontal, 20)
                 .frame(height: 100)
                 .liquidGlassBackground(.init(corner: 30, tint: Color.red.opacity(0.1)))
                 .padding(.horizontal, 30)

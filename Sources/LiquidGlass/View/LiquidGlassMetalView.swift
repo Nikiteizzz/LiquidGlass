@@ -21,6 +21,8 @@ public struct DispersionParams {
 }
 
 final public class LiquidGlassMetalView: MTKView, MTKViewDelegate {
+    private var screenCapturer = GlobalWindowCapturer.shared
+    
     private var commandQueue: MTLCommandQueue?
     private var refractionPipeline: MTLRenderPipelineState?
     private var dispersionPipeline: MTLRenderPipelineState?
@@ -44,14 +46,22 @@ final public class LiquidGlassMetalView: MTKView, MTKViewDelegate {
         super.init(frame: frameRect, device: metalDevice)
         setupMetal()
     }
-
+    
     required init(coder: NSCoder) {
         super.init(coder: coder)
         self.device = MTLCreateSystemDefaultDevice()
         setupMetal()
     }
+    
+    public override func removeFromSuperview() {
+        super.removeFromSuperview()
+        
+        screenCapturer.removeObserver(self)
+    }
 
     private func setupMetal() {
+        screenCapturer.addObserver(self)
+        
         guard let device = self.device else {
             return
         }
@@ -202,4 +212,16 @@ final public class LiquidGlassMetalView: MTKView, MTKViewDelegate {
     }
 
     public func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {}
+}
+
+extension LiquidGlassMetalView: @MainActor WindowRenderObserver {
+    func setInputImage(_ image: UIImage) {
+        guard
+            let window
+        else { return }
+        
+        let frameInWindow = convert(bounds, to: window)
+        
+        setImage(image.cropped(to: frameInWindow))
+    }
 }

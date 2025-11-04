@@ -28,8 +28,6 @@ public struct LiquidGlassMetalViewRepresentable: UIViewRepresentable {
         uiView.effectHeight = glassType.height
         uiView.effectAmount = glassType.amount
         uiView.corner = corner
-        
-        uiView.setImage(prepareImage(globalScreenCapturer.lastCapturedImage, for: uiView))
     }
     
     private func prepareImage(_ source: UIImage, for view: UIView) -> UIImage {

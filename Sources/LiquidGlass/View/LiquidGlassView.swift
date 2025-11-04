@@ -13,18 +13,12 @@ public struct LiquidGlassView: View {
     
     public var body: some View {
         LiquidGlassMetalViewRepresentable(corner: configuration.corner, glassType: glassType)
-            .overlay {
+            .liquidGlassOverlay {
                 configuration.tint
                     .clipShape(.rect(cornerRadius: configuration.corner))
             }
             .liquidGlassBorder(corner: configuration.corner)
         
-    }
-    
-    public func liquidGlassOverlay<Overlay: View>(_ content: @escaping () -> Overlay) -> some View {
-        self.overlay(content: {
-            NonRenderableHostingViewRepresentable(content: content)
-        })
     }
 }
 

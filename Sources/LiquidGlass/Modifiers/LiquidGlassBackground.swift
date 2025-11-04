@@ -35,4 +35,10 @@ public extension View {
             )
         )
     }
+    
+    func liquidGlassOverlay<Overlay: View>(_ content: @escaping () -> Overlay) -> some View {
+        self.overlay(content: {
+            NonRenderableHostingViewRepresentable(content: content)
+        })
+    }
 }

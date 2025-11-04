@@ -15,17 +15,17 @@ public struct LiquidGlassBorder: ViewModifier {
                     .stroke(
                         LinearGradient(
                             stops: [
-                                .init(color: .black, location: 0),
-                                .init(color: .white, location: 0.25),
-                                .init(color: .white, location: 0.75),
-                                .init(color: .black, location: 1)
+                                .init(color: .black.opacity(0.2), location: 0),
+                                .init(color: .white, location: 0.15),
+                                .init(color: .white, location: 0.85),
+                                .init(color: .black.opacity(0.2), location: 1)
                             ],
                             startPoint: .bottomLeading,
                             endPoint: .topTrailing
                         ),
                         lineWidth: 1
                     )
-                    .opacity(0.5)
+                    .opacity(0.3)
             }
     }
 }

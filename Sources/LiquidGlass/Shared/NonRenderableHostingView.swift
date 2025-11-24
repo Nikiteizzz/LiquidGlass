@@ -5,6 +5,10 @@ final class NonRenderableHostingView<Content: View>: UIView {
     
     var content: () -> Content
     
+    override class var layerClass: AnyClass {
+        NonRenderableLayer.self
+    }
+    
     init(content: @escaping () -> Content) {
         self.content = content
         super.init(frame: .zero)

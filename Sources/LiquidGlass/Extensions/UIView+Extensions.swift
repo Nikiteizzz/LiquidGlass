@@ -24,4 +24,17 @@ internal extension UIView {
         
         return result
     }
+    
+    func allSubviews(where closure: (UIView) -> Bool) -> [UIView] {
+        var result = [UIView]()
+        
+        for subview in subviews {
+            if closure(subview) {
+                result.append(subview)
+            }
+            result.append(contentsOf: subview.allSubviews(where: closure))
+        }
+        
+        return result
+    }
 }

@@ -14,7 +14,7 @@ final class GlobalWindowCapturer: ObservableObject {
     
     private var captureFormat: UIGraphicsImageRendererFormat {
         let f = UIGraphicsImageRendererFormat()
-        f.scale = 0.5
+        f.scale = 0.8
         f.preferredRange = .standard
         return f
     }
@@ -37,34 +37,30 @@ final class GlobalWindowCapturer: ObservableObject {
         displayLink?.add(to: .main, forMode: .common)
     }
     
-    @MainActor
-    @objc private func capture() {
-        autoreleasepool {
-            DispatchQueue.main.async { [self] in
-                guard
-                    let window = currentKeyWindow(),
-                    let rootController = window.rootViewController
-                else { return }
-                
-                let rendererFormat = UIGraphicsImageRendererFormat()
-                rendererFormat.scale = 0.9
-                rendererFormat.preferredRange = .standard
-                
-                let allLiquidGlassView = rootController.view.allSubviews(ofType: LiquidGlassMetalView.self)
-                let liquidGlassRects = allLiquidGlassView.map { $0.convert($0.bounds, to: window) }
-                
-                let renderer = UIGraphicsImageRenderer(bounds: window.bounds, format: rendererFormat)
-                let colorSpace = CGColorSpace(name: CGColorSpace.sRGB)!
-                let ciContext = CIContext()
-                renderer.image { context in
-                    context.cgContext.clip(to: liquidGlassRects)
-                    window.layer.render(in: context.cgContext)
-                    
-                    allLiquidGlassView
-                        .forEach {
-                            $0.setInputImage(context.currentImage)
-                        }
-                }
+    @objc @MainActor private func capture() {
+        guard
+            let window = currentKeyWindow()
+        else { return }
+
+        let allLiquidGlassView = window.rootViewController?.view.allSubviews(ofType: LiquidGlassMetalView.self) ?? []
+        let allLiquidGlassOverlays = window.rootViewController?.view.allSubviews(where: { view in
+            view.layer is NonRenderableLayer
+        }) ?? []
+    
+        let liquidGlassRects = allLiquidGlassView.map { $0.convert($0.bounds, to: window) }
+        
+        let renderer = UIGraphicsImageRenderer(bounds: window.bounds, format: captureFormat)
+        renderer.image { context in
+            context.cgContext.clip(to: liquidGlassRects)
+            window.layer.presentation()?.render(in: context.cgContext)
+            
+            allLiquidGlassView.enumerated().forEach { index, view in
+                view.setInputImage(context.currentImage)
+                let bounds = view.convert(view.bounds, to: window)
+                view.drawHierarchy(in: bounds, afterScreenUpdates: false)
+                let overlay = allLiquidGlassOverlays[index]
+                let overlayBounds = overlay.convert(overlay.bounds, to: window)
+                overlay.drawHierarchy(in: overlayBounds, afterScreenUpdates: false)
             }
         }
     }

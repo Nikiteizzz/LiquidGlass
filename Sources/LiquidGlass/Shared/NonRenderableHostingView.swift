@@ -3,11 +3,11 @@ import SwiftUI
 final class NonRenderableHostingView<Content: View>: UIView {
     private var hostingController: UIHostingController<Content>?
     
-    var content: () -> Content
-    
     override class var layerClass: AnyClass {
         NonRenderableLayer.self
     }
+    
+    var content: () -> Content
     
     init(content: @escaping () -> Content) {
         self.content = content

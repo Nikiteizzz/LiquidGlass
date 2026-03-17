@@ -3,12 +3,22 @@ import SwiftUI
 struct LiquidGlassDemoView: View {
     @State
     private var isGlassViewDemoShown = false
+    @State
+    private var glassPosition: CGPoint = .init(x: 100, y: 100)
     
     var body: some View {
         ZStack {
             background
             
-            glassSheets
+            glassModifierDemo(configuration: .init(corner: 20, tint: .clear), type: .regular, index: 1)
+                .frame(width: 200, height: 200)
+            
+            glassModifierDemo(configuration: .init(corner: 20, tint: .clear), type: .regular, index: 2)
+                .frame(width: 200, height: 200)
+                .position(glassPosition)
+                .gesture(DragGesture().onChanged({ gesture in
+                    glassPosition = gesture.location
+                }))
         }
     }
     
@@ -109,39 +119,6 @@ struct LiquidGlassDemoView: View {
             .frame(height: 100)
             .frame(maxWidth: .infinity)
             .liquidGlassBackground(configuration, glassType: type)
-    }
-    
-    @ViewBuilder
-    private var glassSheets: some View {
-        VStack {
-            Toggle("Glass View", isOn: $isGlassViewDemoShown)
-                .padding(.horizontal, 20)
-                .frame(height: 100)
-                .liquidGlassBackground(.init(corner: 30, tint: Color.red.opacity(0.1)))
-                .padding(.horizontal, 30)
-            
-            LazyVGrid(columns: [.init(), .init()]) {
-                if isGlassViewDemoShown {
-                    glassViewDemo(configuration: .basic, type: .clear, index: 1)
-                    glassViewDemo(configuration: .basic, type: .regular, index: 2)
-                    glassViewDemo(configuration: .init(corner: 20), type: .clear, index: 3)
-                    glassViewDemo(configuration: .init(corner: 20), type: .regular, index: 4)
-                    glassViewDemo(configuration: .init(corner: 20, tint: .black.opacity(0.3)), type: .clear, index: 5)
-                    glassViewDemo(configuration: .init(corner: 20, tint: .black.opacity(0.3)), type: .regular, index: 6)
-                    glassViewDemo(configuration: .init(corner: 20, tint: .white.opacity(0.3)), type: .clear, index: 7)
-                    glassViewDemo(configuration: .init(corner: 20, tint: .white.opacity(0.3)), type: .regular, index: 8)
-                } else {
-                    glassModifierDemo(configuration: .basic, type: .clear, index: 1)
-                    glassModifierDemo(configuration: .basic, type: .regular, index: 2)
-                    glassModifierDemo(configuration: .init(corner: 20), type: .clear, index: 3)
-                    glassModifierDemo(configuration: .init(corner: 20), type: .regular, index: 4)
-                    glassModifierDemo(configuration: .init(corner: 20, tint: .black.opacity(0.3)), type: .clear, index: 5)
-                    glassModifierDemo(configuration: .init(corner: 20, tint: .black.opacity(0.3)), type: .regular, index: 6)
-                    glassModifierDemo(configuration: .init(corner: 20, tint: .white.opacity(0.3)), type: .clear, index: 7)
-                    glassModifierDemo(configuration: .init(corner: 20, tint: .white.opacity(0.3)), type: .regular, index: 8)
-                }
-            }
-        }
     }
 }
 

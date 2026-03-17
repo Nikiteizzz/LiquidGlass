@@ -12,14 +12,12 @@ public struct LiquidGlassBackground: ViewModifier {
     }
     
     public func body(content: Content) -> some View {
-        content
-            .opacity(0)
-            .background {
-                LiquidGlassView(configuration: configuration, glassType: type)
-                    .liquidGlassOverlay {
-                        content
-                    }
-            }
+        NonRenderableHostingViewRepresentable {
+            content
+                .background {
+                    LiquidGlassView(configuration: configuration, glassType: type)
+                }
+        }
     }
 }
 

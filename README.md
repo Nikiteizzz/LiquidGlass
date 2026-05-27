@@ -48,6 +48,4 @@ If you have any questions, ideas, or feedback — feel free to reach out:
 
 [Linkedin](https://www.linkedin.com/in/nikiteizzz/)
 
-[Telegram](https://t.me/nikiteizzz)
-
 
